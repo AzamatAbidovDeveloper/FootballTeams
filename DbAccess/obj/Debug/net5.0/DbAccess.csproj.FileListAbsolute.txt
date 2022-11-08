@@ -1,0 +1,14 @@
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\DbAccess.deps.json
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\DbAccess.runtimeconfig.json
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\DbAccess.runtimeconfig.dev.json
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\DbAccess.dll
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\ref\DbAccess.dll
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\bin\Debug\net5.0\DbAccess.pdb
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.AssemblyInfoInputs.cache
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.AssemblyInfo.cs
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.csproj.CoreCompileInputs.cache
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.dll
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\ref\DbAccess.dll
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.pdb
+C:\Users\Азамат\source\repos\WebApp_2\DbAccess\obj\Debug\net5.0\DbAccess.genruntimeconfig.cache
