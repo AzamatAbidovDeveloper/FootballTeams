@@ -1,0 +1,16 @@
+﻿@page "/teams/england"
+@inject IRepository db
+
+<div class="spain-teams">
+    <TeamList ListOfTeams="teams" />
+</div>
+
+@code {
+
+    List<TeamModel> teams;
+
+    protected override void OnInitialized()
+    {
+        teams = db.GetTeams().Where(x => x.CountryID == 1).ToList();
+    }
+}

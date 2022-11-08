@@ -1,0 +1,77 @@
+﻿@page "/country/edit/{CountryID:int}" 
+@inject IRepository db
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-info">Edit Country</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        @if (country is not null)
+        {
+            <FormForCountry Countries="country" OnvalidSubmit="Edit" />
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Invalid ID, Please try again!
+            </div> 
+        }
+    </div>
+    <div class="col-6">
+        @if (message is not null)
+        {
+            <div class="@cssClass text-center py-2">@message</div> 
+            @foreach (var item in allCountries)
+            {
+                <div class="row justify-content-lg-between m-1 text-white">
+                    <div class="col-6 bg-primary">
+                        ID: @item.ID
+                    </div>
+                    <div class="col-6 bg-info">
+                        Name: @item.Name
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter] public int CountryID { get; set; }
+
+    Country country;
+    string message = string.Empty;
+    string cssClass = string.Empty;
+    List<Country> allCountries = new();
+
+    protected override void OnInitialized()
+    {
+        country = db.GetCountryByID(CountryID);
+    }
+
+    void Edit()
+    {
+        var result = db.EditCountry(country);
+        if(result)
+        {
+            cssClass = "alert alert-success";
+            message = "Editing Success!";
+            UpdateCountryList();
+        }
+        else
+        {
+            cssClass = "alert alert-danger";
+            message = "Editing Failed!";
+        }
+    }
+    void UpdateCountryList()
+    {
+        allCountries = new();
+        allCountries = db.GetCountries();
+    }
+}
+

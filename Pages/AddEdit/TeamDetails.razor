@@ -1,0 +1,18 @@
+﻿@page "/teams/{TeamID:int}"
+@page "/teams/{TeamID:int}/{TeamName}"
+@inject IRepository db
+
+<h3>@team.Team</h3>
+
+@code {
+
+    [Parameter] public int TeamID { get; set; }
+    [Parameter] public string TeamName { get; set; }
+
+    TeamModel team;
+
+    protected override void OnInitialized()
+    {
+        team = db.GetTeamByID(TeamID);
+    }
+}

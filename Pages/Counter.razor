@@ -1,0 +1,21 @@
+﻿@if (Team != null)
+{
+    <tr style="font-size: 23px">
+        @*<td><img style="width: 30px;" src="@Team.Image" /></td>*@
+        <td>@Team.Team</td>
+        <td>@Team.Coach</td>
+        <td>@Team.FoundingDate.ToShortDateString()</td>
+        <td>@Team.Stadium</td>
+    </tr>
+}
+else
+{
+    <h1>Sorry, not found Teams</h1>
+}
+
+
+@code {
+
+    [Parameter] public TeamModel Team { get; set; }
+
+}

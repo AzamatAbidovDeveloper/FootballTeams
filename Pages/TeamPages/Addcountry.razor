@@ -1,0 +1,41 @@
+﻿@page "/country/{CountryID:int}"
+@page "/country/{CountryID:int}/{CountryName}"
+@inject IRepository db
+
+<h3 class="mb-5" style="font-size: 35px; font-weight: 700">@country.Name</h3>
+
+<div class="table">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr style="font-size: 25px">
+                <th>Team</th>
+                <th>Coach</th>
+                <th>Founding Date</th>
+                <th>Stadium</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in country.Teams)
+            {
+                <Counter Team="item" />
+            }
+        </tbody>        
+    </table>
+</div>
+
+@code {
+
+    //TODO table of teams in this country
+
+    [Parameter] public int CountryID { get; set; }
+    [Parameter] public string CountryName { get; set; }
+
+    Country country;
+
+    protected override void OnInitialized()
+    {
+        country = db.GetCountryByID(CountryID);
+
+        country.Teams = db.GetTeams().Where(x=>x.CountryID == CountryID);
+    }
+}

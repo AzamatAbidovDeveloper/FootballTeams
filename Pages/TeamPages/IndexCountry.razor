@@ -1,0 +1,26 @@
+﻿@page "/countries"
+@inject IRepository db
+
+<div class="row mt-3 mb-5">
+    <div class="col">
+        <h1 class="text-black text-center">Countries</h1>
+    </div>
+</div>
+
+<div class="row text-center mb-4">
+    @foreach (var item in Countries)
+    {
+        <CountryList Country="item" />
+    }
+</div>
+
+@code {
+
+    [Parameter] public List<Country> Countries { get; set; }
+    [Parameter] public Country Country { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Countries = db.GetCountries();
+    }
+}

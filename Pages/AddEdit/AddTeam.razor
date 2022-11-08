@@ -1,0 +1,35 @@
+﻿@page "/teams/add"
+@inject NavigationManager navManager
+@inject IRepository db
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-dark text-center text-uppercase">Add team</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <TeamForm Team="team" IsImage="true" OnValidSubmit="AddNewTeam" />
+    </div>
+</div>
+
+@code {
+
+    TeamModel team = new();
+
+    void AddNewTeam()
+    {
+        bool result = db.CreateNewTeam(team);
+
+        if (result)
+        {
+            if (team.CountryID == 1)
+                navManager.NavigateTo("/teams/england");
+
+            else if (team.CountryID == 5)
+                navManager.NavigateTo("/teams/spain");
+        }
+    }
+
+}

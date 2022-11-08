@@ -1,0 +1,72 @@
+﻿@page "/teams/search"
+@inject IRepository db
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-black">Search Team</h1>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-sm-12 col-md-6">
+        <input type="text" class="form-control mb-2" placeholder="Enter Team Name" @bind-value="teamName" @bind-value:event="oninput"
+               @onkeypress="((KeyboardEventArgs args) => TeamNameKeyPressHandler(args))" />
+
+        <select class="form-control mb-2" @bind="selectedTeamCountry">
+            <option value="none">Select Country</option>
+            @foreach (var item in countries)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+
+        <button type="button" class="btn btn-outline-primary form-control mt-4 mb-2" @onclick="Searchteam">Search</button>
+        <button type="button" class="btn btn-outline-danger form-control mb-2" @onclick="ResetValues">Reset</button>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="border border-primary rounded p-2">
+            <p>Team: @teamName</p>
+            <p>Country: @selectedTeamCountry</p>
+        </div>
+    </div>
+</div>
+
+<div class="border border-dark rounded p-3 my-3 mx-1">
+    <TeamList ListOfTeams="teams"/>
+</div>
+
+@code {
+
+    string teamName = string.Empty;
+    string selectedTeamCountry = "none";
+    List<Country> countries = new();
+    List<TeamModel> teams = new();
+
+    void TeamNameKeyPressHandler(KeyboardEventArgs args)
+    {
+        if(args.Key == "Enter")
+        {
+            Searchteam();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        countries = db.GetCountries();
+    }
+
+    void Searchteam()
+    {
+        teams = db.GetTeams();
+        if(!string.IsNullOrEmpty(teamName))
+            teams = teams.Where(x => x.Team.ToLower().Contains(teamName.ToLower())).ToList();
+        if (selectedTeamCountry != "none")
+            teams = teams.Where(x => x.CountryID.ToString().Equals(selectedTeamCountry)).ToList();
+    }
+    void ResetValues()
+    {
+        teamName = string.Empty;
+        selectedTeamCountry = "none";
+        teams = new();
+    }
+}

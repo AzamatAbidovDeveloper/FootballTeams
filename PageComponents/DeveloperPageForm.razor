@@ -1,0 +1,33 @@
+﻿<EditForm Model="Developer" OnValidSubmit="OnValidSubmitHandler">
+    <div class="form-group">
+        <label>Developer Name:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Developer.Name" />
+            <ValidationMessage For="(()=>Developer.Name)" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <InputImage Label="Image" OnImageFileSelected="@ImageFileSelectedHandler" ImageUrl="@imageUrl" /> @*image loading field*@
+    <div class="form-group form-markdown">
+        <MarkdownInput Label="Description" OnFor="(()=>Developer.StudioDescription)"/>
+    </div>
+</EditForm>
+
+@code {
+
+    [Parameter] public TeamSponsor Developer { get; set; }
+    [Parameter] public EventCallback OnValidSubmitHandler { get; set; }
+    string imageUrl;
+
+    protected override void OnInitialized()
+    {
+        imageUrl = Developer.Image;
+        Developer.Image = null;
+    }
+
+    void ImageFileSelectedHandler(string imageBase64)
+    {
+        Developer.Image = imageBase64;
+        imageUrl = null;
+    }
+}

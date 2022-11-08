@@ -1,0 +1,91 @@
+﻿@using WebApp_2.Helpers 
+@inject IRepository db
+
+<EditForm Model="Team" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Team:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Team.Team" />
+            <ValidationMessage For="@(()=>Team.Team)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Coach:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Team.Coach" />
+            <ValidationMessage For="@(()=>Team.Coach)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Founding Date:</label>
+        <div>
+            <InputDate class="form-control" @bind-Value="Team.FoundingDate" />
+            <ValidationMessage For="@(()=>Team.FoundingDate)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>CountryID:</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="Team.CountryID" />
+            <ValidationMessage For="@(()=>Team.CountryID)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Stadium:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Team.Stadium" />
+            <ValidationMessage For="@(()=>Team.Stadium)"></ValidationMessage>
+        </div>
+    </div>
+    @if (IsImage)
+    {
+        <div class="form-group">
+            <InputImage Label="Image" OnImageFileSelected="ImageFileSelectedHandler" ImageUrl="@imageUrl" />
+            <ValidationMessage For="@(()=>Team.Image)"></ValidationMessage>
+        </div>
+    }
+    <div class="form-group form-markdown">
+        <MarkdownInput @bind-Value="Team.Description"
+                       Label="Description" OnFor="(()=>Team.Description)" />
+    </div>
+    <div class="form-group">
+        <label>UEFA Cups:</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="Team.UEFACups" />
+            <ValidationMessage For="@(()=>Team.UEFACups)"></ValidationMessage>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</EditForm>
+
+@code {
+
+    [Parameter] public TeamModel Team { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public bool IsImage { get; set; }
+    [Parameter] public List<TeamSponsor> SelectedDevelopers { get; set; } = new();
+
+    string imageUrl;
+
+    protected override void OnInitialized()
+    {
+
+        Team.FoundingDate = DateTime.Now;
+
+        if (!string.IsNullOrWhiteSpace(Team.Image))
+        {
+            imageUrl = Team.Image;
+        }
+    }
+
+    void ImageFileSelectedHandler(string imageBase64)
+    {
+        Team.Image = imageBase64;
+    }
+
+    async Task<IEnumerable<TeamSponsor>> SearchHandler(string searchText)
+    {
+        return db.GetSponsors();
+    }
+}

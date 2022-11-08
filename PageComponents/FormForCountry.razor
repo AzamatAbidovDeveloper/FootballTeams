@@ -1,0 +1,17 @@
+﻿<EditForm Model="Countries" OnValidSubmit="OnvalidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Country Name</label>
+        <div>
+            <InputText class="form-control" @bind-Value="Countries.Name" />
+            <ValidationMessage For="(() => Countries.Name)" />
+        </div>
+    </div>
+    <button class="btn btn-outline-primary">Save</button>
+</EditForm>
+
+@code {
+
+    [Parameter] public Country Countries { get; set; }
+    [Parameter] public EventCallback OnvalidSubmit{ get; set; }
+}

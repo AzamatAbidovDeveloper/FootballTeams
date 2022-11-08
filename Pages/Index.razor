@@ -1,0 +1,50 @@
+﻿@page "/"
+@inject IRepository  db    
+
+<div class="row mt-3" style="background-image: linear-gradient(rgb(52, 62, 80) 0%, rgb(51, 56, 58) 70%); height: 70px">
+    <div class="col d-flex justify-content-center align-items-center">
+        <h1 style="color: white">Welcome to Football World</h1>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-6 back-block">
+        <a href="/teams/england">
+            <div class="back-image">
+                <img src="/images/APL1.jpg" style="width: 100%; height: 100%" />
+                <p class="back-text" style="color: white; font-weight: 700">Premier League</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 back-block">
+        <a href="/teams/spain">
+            <div class="back-image">
+                <img src="/images/laliga.jpg" style="width: 100%; height: 100%" />
+                <p class="back-text" style="color: black; font-weight: 600">La Liga</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-6 back-block">
+        <a href="#">
+            <div class="back-image">
+                <img src="/images/bundesliga.jpg" style="width: 100%; height: 100%" />
+                <p class="back-text" style="color: black; font-weight: 600">Bundesliga</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 back-block">
+        <a href="#">
+            <div class="back-image">
+                <img src="/images/serieA.jpg" style="width: 100%; height: 100%" />
+                <p class="back-text" style="color: white; font-weight: 600">Serie A</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+@code{
+
+}

@@ -1,0 +1,39 @@
+﻿@page "/teams/edit/{TeamID:int}"
+@inject IRepository db
+@inject NavigationManager navManager
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-dark text-center text-uppercase">Edit team</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <TeamForm Team="team" IsImage="false" OnValidSubmit="Editteam" />
+    </div>
+</div>
+
+@code {
+
+    [Parameter] public int TeamID { get; set; }
+    TeamModel team;
+
+    protected override void OnInitialized()
+    {
+        team = db.GetTeamByID(TeamID);
+    }
+    void Editteam()
+    {
+        bool result = db.EditTeam(team);
+
+        if (result)
+        {
+            if (team.CountryID == 1)
+                navManager.NavigateTo("/teams/england");
+
+            else if (team.CountryID == 5)
+                navManager.NavigateTo("/teams/spain");
+        }
+    }
+}
